@@ -1,0 +1,115 @@
+﻿ 
+ 
+<head>
+
+    <style>
+     
+
+        .page-title {
+            background-size: cover;
+            background-position: center;
+            padding: 80px 0;
+            color: white;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        }
+
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            }
+
+        .card-img-top {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .filter-buttons {
+            margin-bottom: 30px;
+        }
+
+            .filter-buttons .btn {
+                margin-right: 10px;
+            }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+  
+</head>
+
+
+
+<!-- Filtreleme Butonları -->
+<div class="container filter-buttons text-center mt-5" id="filterButtons">
+    <button class="btn btn-outline-dark" onclick="filterServices('all')">Tümü</button>
+</div>
+
+<!-- Hizmet Kartları Bölümü -->
+<section class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="row g-4" id="servicesContainer">
+
+            <!-- Kartlar burada olacak -->
+
+        </div>
+    </div>
+</section>
+
+<script>
+    const services = [
+      { title: 'Yurt Dışı İşlemleri', category: 'Uluslararası', image: '/img/content/images/pages/103-150x150.jpg', link: 'yurt_disi_islemleri.html', description: 'Yurt dışına çıkarılacak olan kedi, köpek ve diğer evcil hayvanların işlemleri titizlikle yürütülmektedir...' },
+      { title: 'Genel Cerrahi', category: 'Cerrahi', image: '/img/content/images/pages/104-150x150.jpg', link: 'genel_cerrahi.html', description: 'Tam donanımlı ameliyathanemizde 7/24 uzman hekimler tarafından cerrahi işlemler yapılmaktadır...' },
+      { title: 'Ortopedi', category: 'Cerrahi', image: '/img/content/images/pages/105-150x150.jpg', link: 'ortopedi.html', description: 'Ortopedik cerrahilerde modern yöntemlerle yüksek başarı oranları sağlanmaktadır...' },
+      { title: 'Dahiliye', category: 'İç Hastalıkları', image: '/img/content/images/pages/106-150x150.jpg', link: 'dahiliye.html', description: 'Evcil hayvanların en sık karşılaştığı sağlık problemlerinden olan iç hastalıkları, detaylı olarak ele alınır...' },
+      { title: 'Onkoloji', category: 'İç Hastalıkları', image: '/img/content/images/pages/107-150x150.jpg', link: 'onkoloji.html', description: 'Tümöral hastalıklarda tanı ve tedavi süreçleri multidisipliner olarak yürütülmektedir...' },
+      { title: 'Doğum', category: 'Cerrahi', image: '/img/content/images/pages/108-150x150.jpg', link: 'dogum.html', description: 'Doğum sürecinde veteriner hekimlerimizle güvenli müdahaleler sağlanmaktadır...' },
+    ];
+
+    const servicesContainer = document.getElementById('servicesContainer');
+    const filterButtons = document.getElementById('filterButtons');
+    const addedCategories = new Set();
+
+    services.forEach(service => {
+      // Kategori butonlarını dinamik oluştur
+      if (!addedCategories.has(service.category)) {
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-outline-dark';
+        btn.textContent = service.category;
+        btn.onclick = () => filterServices(service.category);
+        filterButtons.appendChild(btn);
+        addedCategories.add(service.category);
+      }
+
+      // Kart oluştur
+      const col = document.createElement('div');
+      col.className = `col-lg-4 col-md-6 service-card ${service.category.replace(/\s+/g, '-').toLowerCase()}`;
+      col.innerHTML = `
+        <div class="card h-100">
+          <img src="${service.image}" onerror="this.src='/content/assets/images/resimyok.png';" class="card-img-top mx-auto mt-4" alt="${service.title}">
+          <div class="card-body text-center">
+            <h5 class="card-title">${service.title}</h5>
+            <p class="card-text">${service.description}</p>
+          </div>
+        </div>
+      `;
+      servicesContainer.appendChild(col);
+    });
+
+    function filterServices(category) {
+      const cards = document.querySelectorAll('.service-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.classList.contains(category.replace(/\s+/g, '-').toLowerCase())) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+</script>

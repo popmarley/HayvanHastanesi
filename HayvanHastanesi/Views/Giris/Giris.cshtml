@@ -1,0 +1,182 @@
+﻿@{
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konya Hayvan Hastanesi | Yönetici Girişi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="~/content/assets/images/logo_icon.ico" />
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0e141b;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-image: linear-gradient(135deg, #1f2a38 0%, #0e141b 100%);
+        }
+
+        .login-card {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 40px 32px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+            .login-card h1 {
+                text-align: center;
+                font-size: 1.6rem;
+                font-weight: 600;
+            }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            
+        }
+
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #ccc;
+        }
+
+        input {
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid #2f3c4d;
+            background-color: #1c2530;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+
+            input:focus {
+                border-color: #ffb64a;
+            }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        .btn {
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #ffb64a;
+            color: #000;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+            .btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 14px rgba(255, 182, 74, 0.4);
+            }
+
+        @@media(max - width: 480px)
+
+        {
+            .login-card
+
+        {
+            padding: 32px 24px;
+        }
+
+        }
+
+
+        .password-wrapper {
+            position: relative;
+        }
+
+            .password-wrapper input {
+                width: 93%;
+                
+            }
+
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: #aaa;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <form class="login-card" asp-action="Giris" method="post">
+        <img src="~/content/assets/images/logoyazılı.png" alt="PetVet Logo" class="logo" />
+        <h1>Yönetici Girişi</h1>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div style="color:red; font-size: 0.9rem;">@ViewData.ModelState[""]?.Errors.FirstOrDefault()?.ErrorMessage</div>
+        }
+
+        <div class="input-group">
+            <label for="email">E-posta</label>
+            <input type="email" id="email" name="email" placeholder="ornek@konyanhayvanhastanesi.com" required />
+        </div>
+        <div class="input-group">
+            <label for="password">Şifre</label>
+            <div class="password-wrapper">
+                <input type="password" id="password" name="password" placeholder="••••••••" required />
+                <span id="togglePassword" class="password-toggle" onclick="togglePassword()">👁️</span>
+            </div>
+        </div>
+
+        <div class="remember-forgot">
+            <label><input type="checkbox" name="rememberMe" /> Beni hatırla</label>
+            <a href="#" style="color: #ffb64a;">Şifremi unuttum</a>
+        </div>
+        <button type="submit" class="btn">Giriş Yap</button>
+    </form>
+</body>
+
+<script>
+    function togglePassword() {
+        const passwordInput = document.getElementById("password");
+        const toggleIcon = document.getElementById("togglePassword");
+
+        const isHidden = passwordInput.type === "password";
+        passwordInput.type = isHidden ? "text" : "password";
+        toggleIcon.textContent = isHidden ? "🙈" : "👁️";
+    }
+</script>
+
+
+
+</html>

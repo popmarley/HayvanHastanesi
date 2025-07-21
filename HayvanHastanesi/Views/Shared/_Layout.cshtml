@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Konya Hayvan Hastanesi</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HayvanHastanesi.styles.css" asp-append-version="true" />
+    <link rel="icon" type="image/x-icon" href="~/content/assets/images/logo_icon.ico" />
+    <link href="~/content/assets/css/responsive1bce.css?v=6" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="boxed_wrapper">
+    <!-- Ana Header -->
+    <header class="main-header bg-white shadow-sm sticky-top">
+        <!-- Üst Bilgi -->
+        <div class="header-top bg-light py-2 border-bottom">
+            <div class="container d-flex justify-content-between align-items-center flex-wrap text-center text-md-start">
+                <ul class="list-inline mb-0 small">
+                    <li class="list-inline-item me-3">
+                        <i class="fas fa-envelope me-1"></i>
+                        <a href="mailto:konyahayvanhastanesi@gmail.com">konyahayvanhastanesi@gmail.com</a>
+                    </li>
+                    <li class="list-inline-item me-3">
+                        <i class="fas fa-phone me-1"></i>
+                        <a href="tel:05326290332">0 532 629 03 32</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <i class="fas fa-clock me-1"></i>
+                        7/24 Açık
+                    </li>
+                </ul>
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </li>
+                    <!-- Admin Giriş İkonu -->
+                    <li class="list-inline-item">
+                        <a href="/Giris/Giris" target="_blank">
+                            <i class="fas fa-door-open"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Ana Menü Alanı -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container">
+                <!-- Logo -->
+                <a class="navbar-brand" asp-controller="Anasayfa" asp-action="Anasayfa">
+                    <img src="~/content/assets/images/logoyazılı.png" alt="Konya Hayvan Hastanesi" style="height: 57px;">
+                </a>
+
+                <!-- Hamburger Menü -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                        aria-controls="mainNav" aria-expanded="false" aria-label="Menüyü Aç">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menü Öğeleri -->
+                <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+                    <ul class="navbar-nav mb-2 mb-lg-0 text-center">
+                        <li class="nav-item">
+                            <a class="nav-link px-3 fs-5" asp-controller="Anasayfa" asp-action="Anasayfa">Ana Sayfa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3 fs-5" asp-controller="Hizmetlerimiz" asp-action="Hizmetlerimiz">Hizmetlerimiz</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3 fs-5" asp-controller="Hakkimizda" asp-action="Hakkimizda">Hakkımızda</a>
+                        </li>
+                       
+                        <li class="nav-item">
+                            <a class="nav-link px-3 fs-5" asp-controller="Iletisim" asp-action="Iletisim">İletişim</a>
+                        </li>
+                        <li class="nav-item d-lg-none">
+                            <a class="nav-link px-3 fs-5" href="/Giris/Giris">
+                                <i class="fas fa-door-open me-1"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Randevu Butonu -->
+                <a asp-controller="Iletisim" asp-action="Iletisim" class="btn btn-primary d-none d-lg-block ms-3">Randevu Al</a>
+            </div>
+        </nav>
+    </header>
+
+
+
+    @RenderBody()
+
+    <!-- footer -->
+    <footer class="main-footer bg-light text-dark py-3 border-top">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center text-center text-md-start gap-3 fs-6">
+
+                <!-- Logo -->
+                <div>
+                    <a asp-controller="Anasayfa" asp-action="Anasayfa">
+                        <img src="~/content/assets/images/logoyazılı.png" alt="Konya Hayvan Hastanesi" style="height: 60px;">
+                    </a>
+                </div>
+
+                <!-- Sosyal Medya -->
+                <div class="fs-5">
+                    <a href="https://www.facebook.com/Eryaman-Veteriner-Hastanesi-107380981155105/"
+                       target="_blank" class="text-dark me-3" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/eryamanveterinerhastanesi/"
+                       target="_blank" class="text-dark" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+
+                <!-- İletişim -->
+                <div class="fw-semibold">
+                    <span class="me-4">
+                        <i class="fas fa-envelope me-2"></i>
+                        <a href="mailto:konyahayvanhastanesi@gmail.com" class="text-decoration-none text-dark">
+                            konyahayvanhastanesi@gmail.com
+                        </a>
+                    </span>
+                    <span>
+                        <i class="fas fa-phone me-2"></i>
+                        <a href="tel:05326290332" class="text-decoration-none text-dark">
+                            0 532 629 03 32
+                        </a>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Alt Bilgi -->
+            <div class="text-center small text-secondary mt-3">
+                &copy; <span id="year"></span> Konya Hayvan Hastanesi – Tüm hakları saklıdır.
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- //footer -->
+    <!--Yukarı Kaydır-->
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <span class="fa fa-arrow-up"></span>
+    </button>
+    <!--//Yukarı Kaydır-->
+    <!-- jequery plugins -->
+    <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="content/assets/js/js.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const scrollBtn = document.querySelector(".scroll-top");
+        if (!scrollBtn) return;
+
+        // Scroll yapılınca butonun görünmesi
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add("open");
+            } else {
+                scrollBtn.classList.remove("open");
+            }
+        });
+
+        // Butona tıklanınca yukarı çık
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth" // buraya "auto" yazarsan anında çıkar
+            });
+        });
+    });
+</script>
+
+</html>
