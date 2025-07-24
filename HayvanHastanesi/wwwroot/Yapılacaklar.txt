@@ -1,0 +1,41 @@
+*Login ekraný
+
+-login ekranýnda þifremi unuttum kýsmý yapýlacak
+-þifremi unuttum da güvenlik sorusu da istenecek ve maile dogrulama kodu gidecek kontrol edecek
+-logine beni hatýrla yapýlacak +
+-kullanýcý giriþi kontrol saðlanacak +
+
+
+*Anasayfa
+-Giriþ yapan kullanýcýnýn adý yazacak +
+
+*Kullanýcýlar menüsünde
+
+-Kullanýcý ekleme yapýlacak
+-Kullanýcýlarý listeleme olacak
+-Gelen iletiþimleri anlýk olarak sayfa yenilemeden ajax ile çekip bildirim gönderecek
+-kullanýcý silme / güncelleme olacak
+
+
+
+*Ýletiþim ekraný
+-Randevu için tarih ve saat eklenecek
+-valisadasyonlar acýklamasý tr olacak ve mail kýsmýna@ koymak gerekecek, telefona sadece sayý yazýlabilecek 11 hane en fazla ve altýnda örnek numara yazacak
+-yazýlan mesaj nasýl gönderildiyse mail kýsmýnda o þekilde görünecek düz yazý seklinde olmayacak
+
+*Mail Menüsünde
+-Hangi seçenek seçili ise o aktif görünecek
+-tikleyince silme iþlevi olacak
+-kullanýcýya göre mailleri okundu okunmadý belli olacak
+-okunmayan mail sayýsý kadar sayý yazacak
+-yýldýzlanan mail sayýsý kadar sayý yazacak
+-silinen mailler çöp kutusuna gidecek
+-çöp kutusunda olan mesajlar 30 gün sonra otomatik olarak silinecek
+-çöp kutusunda direkt silme olacak
+-yenile butonuna basýnca sayfa yenilenmeden gelen kutusunu yenilecek
+-mail gelince bildirimlere düþecek
+-mail gelince bildirim sesi gelecek
+-mail gelince yani okunmamýs mail olunca icon kýsmýnýn yanýnda sayý görünecek paneli (1) gibi
+-maillerin konusu görünecek sadece týklayýnca tümü
+-her sayfada 20 tane mail olacak diðer maillerde sayfa geçiþinde ajaxla çekilip sayfa yenilenmeden getirilecek
+-tikleme yapýnca yýldýzlama ve silme iþlevi de görünecek

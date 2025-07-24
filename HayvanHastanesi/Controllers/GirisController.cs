@@ -18,9 +18,19 @@ namespace HayvanHastanesi.Controllers
 
         public IActionResult Giris()
         {
+            if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Admin", "Admin");
+            }
+
+            ViewBag.LastEmail = Request.Cookies["LastEmail"];
             return View();
         }
-
+        public async Task<IActionResult> Cikis()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Giris");
+        }
 
 
         [HttpPost]
@@ -42,11 +52,22 @@ namespace HayvanHastanesi.Controllers
 
                 var authProperties = new AuthenticationProperties
                 {
-                    IsPersistent = rememberMe, // "Beni Hatırla"
+                    IsPersistent = rememberMe,
                     ExpiresUtc = rememberMe ? DateTimeOffset.UtcNow.AddDays(7) : DateTimeOffset.UtcNow.AddHours(1)
                 };
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProperties);
+
+            
+                if (!rememberMe)
+                {
+                    Response.Cookies.Append("LastEmail", email, new CookieOptions
+                    {
+                        Expires = DateTimeOffset.UtcNow.AddDays(3),
+                        HttpOnly = false,
+                        IsEssential = true
+                    });
+                }
 
                 return RedirectToAction("Admin", "Admin");
             }
@@ -54,5 +75,6 @@ namespace HayvanHastanesi.Controllers
             ModelState.AddModelError("", "E-posta veya şifre hatalı.");
             return View();
         }
+
     }
 }

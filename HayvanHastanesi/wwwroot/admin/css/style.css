@@ -8030,15 +8030,36 @@ a {
     transform: scale(1); } }
 
 .footer {
-  padding-left: 17.1875rem;
-  background-color: rgba(88, 115, 254, 0.04); }
-  .footer .copyright {
-    padding: 0.9375rem; }
-    .footer .copyright p {
-      text-align: center;
-      margin: 0; }
-    .footer .copyright a {
-      color: #593bdb; }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 17.1875rem;
+    padding-right: 1rem;
+    background-color: rgba(88, 115, 254, 0.04);
+}
+
+    .footer .version {
+        padding: 0.9375rem;
+        font-size: 0.9rem;
+    }
+
+    .footer .copyright {
+        padding: 0.9375rem;
+    }
+
+        .footer .copyright p {
+            margin: 0;
+        }
+
+        .footer .copyright a {
+            color: inherit; /* Varsayýlan renk */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+            .footer .copyright a:hover {
+                color: #000; /* Koyu renk hover */
+            }
 
 [data-sidebar-style="mini"] .nav-control,
 [data-layout="horizontal"] .nav-control {
