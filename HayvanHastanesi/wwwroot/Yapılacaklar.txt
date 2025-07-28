@@ -39,3 +39,14 @@
 -maillerin konusu görünecek sadece týklayýnca tümü
 -her sayfada 20 tane mail olacak diðer maillerde sayfa geçiþinde ajaxla çekilip sayfa yenilenmeden getirilecek
 -tikleme yapýnca yýldýzlama ve silme iþlevi de görünecek
+
+
+*Foto galeri sayfasý yapýlacak
+
+*index sayfasýnda
+-neler yapýyoruz kartlarý düzenlenecek
+-neler yapýyoruz karltarý fotolarý deðiþecek
+
+
+*Hizmetlerimiz sayfasýnda
+-filtreleme yaparken footer sabit kalacak

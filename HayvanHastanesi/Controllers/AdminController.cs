@@ -1,11 +1,13 @@
 ﻿using Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HayvanHastanesi.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
-
+       
         private readonly ApplicationDbContext _context;
 
         public AdminController(ApplicationDbContext context)
