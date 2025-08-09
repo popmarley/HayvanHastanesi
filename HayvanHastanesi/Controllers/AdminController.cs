@@ -7,7 +7,7 @@ namespace HayvanHastanesi.Controllers
     [Authorize]
     public class AdminController : Controller
     {
-       
+
         private readonly ApplicationDbContext _context;
 
         public AdminController(ApplicationDbContext context)
@@ -22,5 +22,22 @@ namespace HayvanHastanesi.Controllers
 
             return View(iletisimListesi);
         }
+
+        [HttpGet]
+        public IActionResult EmailRead(int id)
+        {
+            var iletisim = _context.Iletisims.FirstOrDefault(i => i.IletisimID == id);
+            if (iletisim == null) return NotFound();
+
+            // Okundu olarak işaretle
+            if (iletisim.Okundu != "E")
+            {
+                iletisim.Okundu = "E";
+                _context.SaveChanges();
+            }
+
+            return View(iletisim); 
+        }
+            
     }
 }

@@ -42,7 +42,18 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Okundu")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .HasColumnType("char(1)");
+
                     b.Property<DateTime>("OlusturmaTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan?>("RandevuSaati")
+                        .HasColumnType("time");
+
+                    b.Property<DateTime?>("RandevuTarihi")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Soyad")

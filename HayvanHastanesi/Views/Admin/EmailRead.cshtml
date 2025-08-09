@@ -1,0 +1,75 @@
+﻿@model Models.Iletisim
+@{
+    Layout = "_AdminLayout";
+    var tr = new System.Globalization.CultureInfo("tr-TR");
+
+    string adSoyad = $"{Model.Ad} {Model.Soyad}";
+    string gonderim = Model.OlusturmaTarihi.ToString("dd MMMM yyyy HH:mm", tr);
+
+    string randevuMetni;
+    if (Model.RandevuTarihi.HasValue || Model.RandevuSaati.HasValue)
+    {
+        var tarihStr = Model.RandevuTarihi?.ToString("dd MMMM yyyy", tr) ?? "";
+        var saatStr = Model.RandevuSaati.HasValue ? Model.RandevuSaati.Value.ToString(@"hh\:mm") : "";
+        randevuMetni = (tarihStr + " " + saatStr).Trim();
+    }
+    else
+    {
+        randevuMetni = "Randevu yok";
+    }
+
+    // "Konu" alanı yoksa mesajın ilk kısmını başlık gibi kullan
+    string konu = (Model.Mesaj?.Length ?? 0) > 80 ? Model.Mesaj.Substring(0, 80) + "…" : (Model.Mesaj ?? "");
+}
+
+<div class="email-right-box ml-0 ml-sm-4 ml-sm-0">
+    <div class="row">
+        <div class="col-12">
+            <div class="right-box-padding">
+                <div class="toolbar" role="toolbar">
+                    <div class="btn-group mb-4">
+                        <button type="button" class="btn btn-dark">
+                            <i class="fa fa-archive"></i>
+                        </button>
+                        <button type="button" class="btn btn-dark">
+                            <i class="fa fa-exclamation-circle"></i>
+                        </button>
+                        <button type="button" class="btn btn-dark">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="read-content">
+                    <div class="media pt-3">
+                        <div class="media-body">
+                            <h5 class="text-primary">@adSoyad</h5>
+                            <span class="pull-right">@gonderim</span>
+                            <p class="mb-0">@Model.Mail</p>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="media-body">
+                        <h5 class="my-1 text-primary">
+                            Randevu tarihi ve saati: @randevuMetni
+                        </h5>
+                    </div>
+
+                    <br />
+
+                    <div class="read-content-body" style="white-space: pre-wrap;">
+                        @if (!string.IsNullOrWhiteSpace(konu))
+                        {
+                            <p><strong>@konu</strong></p>
+                        }
+             
+                    </div>
+
+                    <hr />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

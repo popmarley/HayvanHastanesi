@@ -1,29 +1,29 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class _3 : Migration
+    public partial class _2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<DateTime>(
-                name: "OlusturmaTarihi",
+            migrationBuilder.AddColumn<string>(
+                name: "Okundu",
                 table: "Iletisims",
-                type: "datetime2",
+                type: "char(1)",
+                maxLength: 1,
                 nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                defaultValue: "");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "OlusturmaTarihi",
+                name: "Okundu",
                 table: "Iletisims");
         }
     }

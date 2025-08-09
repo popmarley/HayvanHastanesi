@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250623133455_3")]
-    partial class _3
+    [Migration("20250809102406_2")]
+    partial class _2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,7 +45,18 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Okundu")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .HasColumnType("char(1)");
+
                     b.Property<DateTime>("OlusturmaTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("RandevuSaati")
+                        .HasColumnType("time");
+
+                    b.Property<DateTime>("RandevuTarihi")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Soyad")
@@ -59,6 +70,42 @@ namespace Data.Migrations
                     b.HasKey("IletisimID");
 
                     b.ToTable("Iletisims");
+                });
+
+            modelBuilder.Entity("Models.Kullanici", b =>
+                {
+                    b.Property<int>("KullaniciID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("KullaniciID"));
+
+                    b.Property<string>("Eposta")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GüvenlikSorusu")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KullaniciAdi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OlusturmaTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Rol")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sifre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("KullaniciID");
+
+                    b.ToTable("Kullanicis");
                 });
 #pragma warning restore 612, 618
         }

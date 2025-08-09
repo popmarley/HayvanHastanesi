@@ -1,115 +1,237 @@
 ﻿@model Models.Iletisim
 
 <head>
-    <style>
-        .form-section {
-            background-color: #f9f9f9;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
+	<style>
+		.form-section {
+			background-color: #f9f9f9;
+			border-radius: 16px;
+			padding: 30px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.1);
+		}
 
-            .form-section h2 {
-                font-size: 24px;
-                font-weight: 600;
-                margin-bottom: 25px;
-            }
+			.form-section h2 {
+				font-size: 24px;
+				font-weight: 600;
+				margin-bottom: 25px;
+			}
 
-        .contact-info p i {
-            width: 25px;
-        }
+		.contact-info p i {
+			width: 25px;
+		}
 
-        .info-box {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-    </style>
+		.info-box {
+			background-color: #f8f9fa;
+			padding: 20px;
+			border-radius: 12px;
+			margin-bottom: 20px;
+		}
+	</style>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
-    <section class="container my-5">
-        <div class="row g-4">
-            <!-- Sol Sütun: İletişim Bilgisi + Harita -->
-            <div class="col-lg-6">
-                <div class="info-box shadow-sm">
-                    <h5 class="mb-3"><i class="fas fa-info-circle text-primary me-2"></i>İletişim Bilgileri</h5>
-                    <p>
-                        <i class="fas fa-map-marker-alt text-danger me-2"></i>
-                    <a href="https://maps.app.goo.gl/tVdGMGpr1GkH8AE6A" target="_blank" class="text-dark text-decoration-none">
-                        Ferhuniye, Mümtaz Koru Sk. No:6, 42060 Selçuklu/Konya
-                        </a>
-                    </p>
-                    <p>
-                        <i class="fas fa-phone text-success me-2"></i>
-                    <a href="tel:05326290332" class="text-dark text-decoration-none">0 532 629 0 332</a>
-                    </p>
+<section class="container my-5">
+	<div class="row g-4">
+		<!-- Sol Sütun: İletişim Bilgisi + Harita -->
+		<div class="col-lg-6">
+			<div class="info-box shadow-sm">
+				<h5 class="mb-3"><i class="fas fa-info-circle text-primary me-2"></i>İletişim Bilgileri</h5>
+				<p>
+					<i class="fas fa-map-marker-alt text-danger me-2"></i>
+					<a href="https://maps.app.goo.gl/tVdGMGpr1GkH8AE6A" target="_blank" class="text-dark text-decoration-none">
+						Ferhuniye, Mümtaz Koru Sk. No:6, 42060 Selçuklu/Konya
+					</a>
+				</p>
+				<p>
+					<i class="fas fa-phone text-success me-2"></i>
+					<a href="tel:05326290332" class="text-dark text-decoration-none">0 532 629 0 332</a>
+				</p>
 
-                    <p><i class="fas fa-envelope text-primary me-2"></i> <a href="mailto:konyahayvanhastanesi@gmail.com" class="text-dark text-decoration-none">konyahayvanhastanesi@gmail.com</a></p>
-                    <p><i class="fas fa-clock text-warning me-2"></i> 7/24 Açık</p>
-                </div>
+				<p><i class="fas fa-envelope text-primary me-2"></i> <a href="mailto:konyahayvanhastanesi@gmail.com" class="text-dark text-decoration-none">konyahayvanhastanesi@gmail.com</a></p>
+				<p><i class="fas fa-clock text-warning me-2"></i> 7/24 Açık</p>
+			</div>
 
-                <div class="rounded shadow overflow-hidden">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3149.254466872099!2d32.490866200000006!3d37.8777313!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d085005ae928bd%3A0x3a9c83a0ae9a1dbc!2s%C3%96zel%20Konya%20Hayvan%20Hastanesi!5e0!3m2!1str!2str!4v1753212090619!5m2!1str!2str" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-            </div>
+			<div class="rounded shadow overflow-hidden">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3149.254466872099!2d32.490866200000006!3d37.8777313!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d085005ae928bd%3A0x3a9c83a0ae9a1dbc!2s%C3%96zel%20Konya%20Hayvan%20Hastanesi!5e0!3m2!1str!2str!4v1753212090619!5m2!1str!2str" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+			</div>
+		</div>
 
-            <!-- Sağ Sütun: Form -->
-            <div class="col-lg-6">
-                <div class="form-section">
-                    <h2>Online İletişim Formu</h2>
+		<!-- Sağ Sütun: Form -->
+		<div class="col-lg-6">
+			<div class="form-section">
+				<h2>Online İletişim Formu</h2>
 
-                    @if (TempData["Success"] != null)
-                    {
-                        <div class="alert alert-success">@TempData["Success"]</div>
-                    }
+				@if (TempData["Success"] != null)
+				{
+					<div class="alert alert-success">@TempData["Success"]</div>
+				}
 
-                    <form asp-action="Iletisim" method="post" novalidate>
-                        <div class="mb-3">
-                            <label asp-for="Ad" class="form-label"></label>
-                            <input asp-for="Ad" class="form-control" placeholder="Adınız" />
-                            <span asp-validation-for="Ad" class="text-danger small"></span>
-                        </div>
+				<form asp-action="Iletisim" method="post" novalidate>
+					<div class="row">
+						<div class="mb-3 col-md-6">
+							<label asp-for="Ad" class="form-label"></label>
+							<input asp-for="Ad" class="form-control" placeholder="Adınız" />
+							<span asp-validation-for="Ad" class="text-danger small"></span>
+						</div>
 
-                        <div class="mb-3">
-                            <label asp-for="Soyad" class="form-label"></label>
-                            <input asp-for="Soyad" class="form-control" placeholder="Soyadınız" />
-                            <span asp-validation-for="Soyad" class="text-danger small"></span>
-                        </div>
+						<div class="mb-3 col-md-6">
+							<label asp-for="Soyad" class="form-label"></label>
+							<input asp-for="Soyad" class="form-control" placeholder="Soyadınız" />
+							<span asp-validation-for="Soyad" class="text-danger small"></span>
+						</div>
 
-                        <div class="mb-3">
-                            <label asp-for="Mail" class="form-label"></label>
-                            <input asp-for="Mail" class="form-control" placeholder="E-posta adresiniz" />
-                            <span asp-validation-for="Mail" class="text-danger small"></span>
-                        </div>
+						<div class="mb-3 col-md-6">
+							<label asp-for="Mail" class="form-label"></label>
+							<input asp-for="Mail" class="form-control" placeholder="E-posta adresiniz" />
+							<span asp-validation-for="Mail" class="text-danger small"></span>
+						</div>
 
-                        <div class="mb-3">
-                            <label asp-for="Telefon" class="form-label"></label>
-                            <input asp-for="Telefon" class="form-control" placeholder="Telefon numaranız" />
-                        </div>
+						<div class="mb-3 col-md-6">
+							<label asp-for="Telefon" class="form-label"></label>
+							<input asp-for="Telefon" class="form-control" placeholder="Örnek: 05326290332" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+							<span asp-validation-for="Telefon" class="text-danger small"></span>
+						</div>
 
-                        <div class="mb-3">
-                            <label asp-for="Mesaj" class="form-label"></label>
-                            <textarea asp-for="Mesaj" class="form-control" rows="4" placeholder="Patili dostumuzun şikayeti..."></textarea>
-                            <span asp-validation-for="Mesaj" class="text-danger small"></span>
-                        </div>
 
-                        <div class="mb-3">
-                            <label asp-for="GirilenGuvenlikKodu" class="form-label">Güvenlik Kodu</label>
-                            <div class="input-group">
-                                <input asp-for="GirilenGuvenlikKodu" class="form-control" placeholder="Güvenlik kodunu girin" />
-                                <span class="input-group-text bg-danger text-white">@ViewBag.GuvenlikKodu</span>
-                            </div>
-                            <span asp-validation-for="GirilenGuvenlikKodu" class="text-danger small"></span>
-                        </div>
+						<div class="mb-3 d-flex gap-2">
+							<button type="button" id="btnSadeceMesaj" class="btn btn-outline-secondary">Sadece mesaj gönder</button>
+							<button type="button" id="btnRandevu" class="btn btn-outline-primary">Randevu al</button>
+						</div>
 
-                        <button type="submit" class="btn btn-primary w-100">Gönder</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+						<input type="hidden" asp-for="RandevuIstiyorum" id="RandevuIstiyorum" value="false" />
 
- 
-    @await Html.PartialAsync("_ValidationScriptsPartial")
+						<div id="randevuAlanlari" class="mt-2 @(Model?.RandevuIstiyorum == true ? "" : "d-none")">
+							<div class="mb-3">
+								<label for="RandevuTarihi" class="form-label">Randevu Tarihi</label>
+								<input asp-for="RandevuTarihi" class="form-control" id="RandevuTarihi" placeholder="Tarih seçiniz" readonly />
+								<span asp-validation-for="RandevuTarihi" class="text-danger small"></span>
+							</div>
+
+							<div class="mb-3">
+								<label for="saatlerContainer" class="form-label">Uygun Saat Seçimi</label>
+								<div id="saatlerContainer" class="d-flex flex-wrap gap-2">
+									@if (Model?.RandevuIstiyorum == true)
+									{
+										<span class="text-muted">Tarih seçiniz.</span>
+									}
+									else
+									{
+										<span class="text-muted">Randevu almak için önce yukarıdan “Randevu al”a tıklayın.</span>
+									}
+								</div>
+								<input type="hidden" asp-for="RandevuSaati" id="RandevuSaati" />
+								<span asp-validation-for="RandevuSaati" class="text-danger small"></span>
+							</div>
+						</div>
+
+						
+
+
+						<div class="mb-3 col-12">
+							<label asp-for="Mesaj" class="form-label"></label>
+							<textarea asp-for="Mesaj" class="form-control" rows="4" placeholder="Patili dostumuzun şikayeti..."></textarea>
+							<span asp-validation-for="Mesaj" class="text-danger small"></span>
+						</div>
+
+						<div class="mb-3 col-12">
+							<label asp-for="GirilenGuvenlikKodu" class="form-label">Güvenlik Kodu</label>
+							<div class="input-group">
+								<input asp-for="GirilenGuvenlikKodu" class="form-control" placeholder="Güvenlik kodunu girin" />
+								<span class="input-group-text bg-danger text-white">@ViewBag.GuvenlikKodu</span>
+							</div>
+							<span asp-validation-for="GirilenGuvenlikKodu" class="text-danger small"></span>
+						</div>
+					</div>
+
+					<button type="submit" class="btn btn-primary w-100">Gönder</button>
+				</form>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+
+@await Html.PartialAsync("_ValidationScriptsPartial")
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/tr.js"></script>
+<script>
+	const randevuAlanlari = document.getElementById("randevuAlanlari");
+	const toggleInput = document.getElementById("RandevuIstiyorum");
+	const btnRandevu = document.getElementById("btnRandevu");
+	const btnSadeceMesaj = document.getElementById("btnSadeceMesaj");
+	const saatHidden = document.getElementById("RandevuSaati");
+	const tarihInput = document.getElementById("RandevuTarihi");
+
+	// Başlangıç durumu (server’dan gelebilir)
+	function setMode(randevuMu) {
+		toggleInput.value = randevuMu ? "true" : "false";
+		if (randevuMu) {
+			randevuAlanlari.classList.remove("d-none");
+			btnRandevu.classList.add("btn-primary"); btnRandevu.classList.remove("btn-outline-primary");
+			btnSadeceMesaj.classList.add("btn-outline-secondary"); btnSadeceMesaj.classList.remove("btn-secondary");
+		} else {
+			randevuAlanlari.classList.add("d-none");
+			saatHidden.value = "";
+			tarihInput.value = "";
+			document.getElementById("saatlerContainer").innerHTML = '<span class="text-muted">Randevu almak için önce yukarıdan “Randevu al”a tıklayın.</span>';
+			btnSadeceMesaj.classList.add("btn-secondary"); btnSadeceMesaj.classList.remove("btn-outline-secondary");
+			btnRandevu.classList.add("btn-outline-primary"); btnRandevu.classList.remove("btn-primary");
+		}
+	}
+
+	// İlk yükleme
+	setMode(@(Model?.RandevuIstiyorum == true ? "true" : "false"));
+
+	btnRandevu.addEventListener("click", () => setMode(true));
+	btnSadeceMesaj.addEventListener("click", () => setMode(false));
+
+	// Tarih seçimi – sadece randevu modunda çalışsın
+	const fp = flatpickr("#RandevuTarihi", {
+		dateFormat: "Y-m-d",
+		minDate: "today",
+		locale: "tr",
+		onChange: function (selectedDates, dateStr) {
+			if (toggleInput.value === "true" && dateStr) fetchSaatler(dateStr);
+		}
+	});
+
+	function fetchSaatler(tarih) {
+		fetch(`/Iletisim/GetMusaitSaatler?tarih=${tarih}`)
+			.then(res => res.json())
+			.then(data => {
+				const container = document.getElementById("saatlerContainer");
+				container.innerHTML = "";
+
+				if (!data.length) {
+					container.innerHTML = '<span class="text-danger">Uygun saat bulunamadı.</span>';
+					return;
+				}
+
+				data.forEach(item => {
+					const btn = document.createElement("button");
+					btn.type = "button";
+					btn.className = "btn btn-sm rounded-pill px-3";
+					btn.textContent = item.saat || item.Saat;
+
+					if (item.dolu || item.Dolu) {
+						btn.classList.add("btn-secondary");
+						btn.disabled = true;
+					} else {
+						btn.classList.add("btn-outline-primary");
+						btn.onclick = function () {
+							document.querySelectorAll("#saatlerContainer button").forEach(b => b.classList.remove("active"));
+							btn.classList.add("active");
+							saatHidden.value = btn.textContent;
+						};
+					}
+
+					container.appendChild(btn);
+				});
+			});
+	}
+</script>
+
+
+
 

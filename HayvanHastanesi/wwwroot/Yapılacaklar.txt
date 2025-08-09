@@ -1,16 +1,15 @@
 *Login ekraný
-
 -login ekranýnda þifremi unuttum kýsmý yapýlacak
 -þifremi unuttum da güvenlik sorusu da istenecek ve maile dogrulama kodu gidecek kontrol edecek
 -logine beni hatýrla yapýlacak +
 -kullanýcý giriþi kontrol saðlanacak +
 
 
-*Anasayfa
+*AdminAnasayfa
 -Giriþ yapan kullanýcýnýn adý yazacak +
+-Mobil görünümde sol panel responsive deðil
 
 *Kullanýcýlar menüsünde
-
 -Kullanýcý ekleme yapýlacak
 -Kullanýcýlarý listeleme olacak
 -Gelen iletiþimleri anlýk olarak sayfa yenilemeden ajax ile çekip bildirim gönderecek
@@ -19,10 +18,13 @@
 
 
 *Ýletiþim ekraný
--Randevu için tarih ve saat eklenecek
--valisadasyonlar acýklamasý tr olacak ve mail kýsmýna@ koymak gerekecek, telefona sadece sayý yazýlabilecek 11 hane en fazla ve altýnda örnek numara yazacak
--yazýlan mesaj nasýl gönderildiyse mail kýsmýnda o þekilde görünecek düz yazý seklinde olmayacak
--randevu saatinde eðer baþkasý alýysa o saate alamaycak
+-Randevu için tarih ve saat eklenecek +
+-valisadasyonlar acýklamasý tr olacak ve mail kýsmýna@ koymak gerekecek, telefona sadece sayý yazýlabilecek 11 hane en fazla ve altýnda örnek numara yazacak +
+-yazýlan mesaj nasýl gönderildiyse mail kýsmýnda o þekilde görünecek düz yazý seklinde olmayacak +
+-randevu saatinde eðer baþkasý alýysa o saate alamaycak +
+-randevu alma alaný  isimler falan yan yana olacak çok uzamýs aþaðýya +
+-Randevu isteyip istemediði sorulacak ona göre iþlem yapýlacak +
+
 
 *Mail Menüsünde
 -Hangi seçenek seçili ise o aktif görünecek
@@ -37,20 +39,30 @@
 -mail gelince bildirimlere düþecek
 -mail gelince bildirim sesi gelecek
 -mail gelince yani okunmamýs mail olunca icon kýsmýnýn yanýnda sayý görünecek paneli (1) gibi
--maillerin konusu görünecek sadece týklayýnca tümü
+-maillerin konusu görünecek sadece týklayýnca tümü +
 -her sayfada 20 tane mail olacak diðer maillerde sayfa geçiþinde ajaxla çekilip sayfa yenilenmeden getirilecek
 -tikleme yapýnca yýldýzlama ve silme iþlevi de görünecek
+-Kiþiye tekrardan mail gönderme iþlevi olacak
+-sýfýrdan Mail gönderme olacak
+-okunmadý butonu olacak
 
+
+
+*Randevular menüsünde
+-randevu menüsü yapýlacak
+-yaklaþan randevular görünecek
 
 *Foto galeri sayfasý yapýlacak
 
 *index sayfasýnda
--neler yapýyoruz kartlarý düzenlenecek
--neler yapýyoruz karltarý fotolarý deðiþecek
+-neler yapýyoruz kartlarý düzenlenecek + 
+-neler yapýyoruz karltarý fotolarý deðiþecek +
+-aktif olan menü seçili görünecek +
 
 
 *Hizmetlerimiz sayfasýnda
--filtreleme yaparken footer sabit kalacak
+-filtreleme yaparken footer sabit kalacak +
 
 *Hakkýmýzda sayfasýnda
--yazýlar yaslanacak
+-yazýlar yaslanacak +
+
