@@ -3,6 +3,17 @@
     Layout = "_AdminLayout";
     var turkceAylar = new[] { "", "Oca", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara" };
 }
+<style>
+    /* Yalnızca okunmayan (H) olan satırlar için */
+    .email-list .message.unread,
+    .email-list .message.unread a,
+    .email-list .message.unread .subject,
+    .email-list .message.unread .date {
+        color: #0b3d91;       /* koyu mavi */
+        font-weight: 700;     /* istersen kaldırabilirsin */
+        text-decoration: none;
+    }
+</style>
 
 <div class="email-right-box ml-0 ml-sm-4 ml-sm-0">
     <div role="toolbar" class="toolbar ml-4 ml-sm-0">
@@ -31,7 +42,9 @@
             ? item.Mesaj.Substring(0, 150) + "…"
             : item.Mesaj ?? "";
 
-            <div class="message">
+            var satirSinifi = item.Okundu == "H" ? "unread" : "";
+
+            <div class="message @satirSinifi">
                 <div>
                     <div class="d-flex message-single">
                         <div class="custom-control custom-checkbox pl-4">
@@ -52,6 +65,7 @@
                 </div>
             </div>
         }
+
     </div>
 
     <!-- panel -->

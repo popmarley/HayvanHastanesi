@@ -38,6 +38,35 @@ namespace HayvanHastanesi.Controllers
 
             return View(iletisim); 
         }
-            
+        [HttpGet]
+        public IActionResult MailMeta()
+        {
+            var lastId = _context.Iletisims
+                .OrderByDescending(i => i.IletisimID)
+                .Select(i => i.IletisimID)
+                .FirstOrDefault();
+
+            var unreadCount = _context.Iletisims.Count(i => i.Okundu == "H");
+            return Json(new { lastId, unreadCount });
+        }
+
+        [HttpGet]
+        public IActionResult CheckMail(long afterId = 0)
+        {
+            var newItems = _context.Iletisims
+                .Where(i => i.IletisimID > afterId)
+                .OrderBy(i => i.IletisimID)
+                .Select(i => new {
+                    iletisimID = i.IletisimID,
+                    mesaj = i.Mesaj,
+                    okundu = i.Okundu,
+                    olusturmaTarihi = i.OlusturmaTarihi
+                })
+                .ToList();
+
+            var unreadCount = _context.Iletisims.Count(i => i.Okundu == "H");
+            return Json(new { unreadCount, newItems });
+        }
+
     }
 }

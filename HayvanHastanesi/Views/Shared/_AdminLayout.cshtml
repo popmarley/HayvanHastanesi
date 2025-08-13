@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Data
+@inject ApplicationDbContext Db
+@{
+	var unreadCount = Db.Iletisims.Count(i => i.Okundu == "H");
+}
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -172,8 +177,11 @@
 								<div class="email-left-box px-0 mb-5">
 									<div class="mail-list mt-4">
 										<a asp-controller="Admin" asp-action="Admin" class="list-group-item active">
-											<i class="fa fa-inbox font-18 align-middle mr-2"></i>Gelen Kutusu<span class="badge badge-primary badge-sm float-right">198</span>
+											<i class="fa fa-inbox font-18 align-middle mr-2"></i>
+											Gelen Kutusu
+											<span class="badge badge-danger text-white badge-sm float-right">@unreadCount</span>
 										</a>
+
 										<a href="javascript:void()" class="list-group-item">
 											<i class="fa fa-star font-18 align-middle mr-2"></i>Yıldızlı <span class="badge badge-danger text-white badge-sm float-right">47</span>
 										</a>
@@ -234,5 +242,150 @@
 
 
 </body>
+<script>
+	(function () {
+	  const BASE_TITLE = document.title;
+	  const POLL_MS = 8000;
+	  const trMonths = ["Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara"];
+
+	  // Bildirim sesi (dosyayı wwwroot/sounds/notify.mp3 olarak koy)
+	  const audio = window._mailNotifyAudio || new Audio('@Url.Content("~/sounds/notify.mp3")');
+	  audio.preload = 'auto';
+	  window._mailNotifyAudio = audio;
+
+	  // Kullanıcı en az bir kez tıklamadan bazı tarayıcılar sesi engeller
+	  let soundEnabled = localStorage.getItem('mail:soundEnabled') === '1';
+	  if (!soundEnabled) {
+		window.addEventListener('click', () => {
+		  soundEnabled = true;
+		  localStorage.setItem('mail:soundEnabled', '1');
+		}, { once: true });
+	  }
+
+	  // Sayfalar arası lastId
+	  let lastId = Number(localStorage.getItem('mail:lastId') || 0);
+	  let firstPoll = true;
+
+	  function updateTitle(unread) {
+		document.title = (unread > 0) ? `(${unread}) ${BASE_TITLE}` : BASE_TITLE;
+	  }
+
+	  function playDing() {
+		if (!soundEnabled) return;
+		audio.currentTime = 0;
+		audio.play().catch(() => {});
+	  }
+
+	  function escapeHtml(str) {
+		if (str == null) return '';
+		const p = document.createElement('p');
+		p.appendChild(document.createTextNode(str));
+		return p.innerHTML;
+	  }
+
+	  function parseDate(val) {
+		if (!val) return null;
+		// /Date(1691577600000)/ desteği
+		if (typeof val === 'string' && val.indexOf('/Date(') === 0) {
+		  const ms = parseInt(val.replace(/[^0-9]/g, ''), 10);
+		  return new Date(ms);
+		}
+		return new Date(val);
+	  }
+
+	  function formatDisplayTime(val) {
+		const d = parseDate(val);
+		if (!d || isNaN(d.getTime())) return '';
+		const now = new Date();
+		const sameDay = d.getFullYear()===now.getFullYear()
+		  && d.getMonth()===now.getMonth()
+		  && d.getDate()===now.getDate();
+		return sameDay
+		  ? d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+		  : `${d.getDate()} ${trMonths[d.getMonth()]}`;
+	  }
+
+	  function renderToList(item) {
+		// Bu sayfada liste yoksa sadece ses+başlık
+		const list = document.querySelector('.email-list');
+		if (!list) return;
+
+		const id = Number(item.iletisimID);
+		const href = '@Url.Action("EmailRead", "Admin")' + `?id=${id}`;
+		const unreadClass = item.okundu === 'H' ? 'unread' : '';
+		const msg = item.mesaj || '';
+		const preview = msg.length > 150 ? msg.substring(0,150) + '…' : msg;
+		const timeStr = formatDisplayTime(item.olusturmaTarihi);
+
+		const html = `
+		  <div class="message ${unreadClass}">
+			<div>
+			  <div class="d-flex message-single">
+				<div class="custom-control custom-checkbox pl-4">
+				  <input type="checkbox" />
+				</div>
+				<div class="ml-2">
+				  <button class="border-0 bg-transparent align-middle p-0">
+					<i class="fa fa-star" aria-hidden="true"></i>
+				  </button>
+				</div>
+			  </div>
+			  <a href="${href}" class="col-mail col-mail-2">
+				<div class="subject">${escapeHtml(preview)}</div>
+				<div class="date">${escapeHtml(timeStr)}</div>
+			  </a>
+			</div>
+		  </div>`;
+		list.insertAdjacentHTML('afterbegin', html);
+	  }
+
+	  async function initMeta() {
+		if (lastId > 0) return;
+		try {
+		  const r = await fetch('@Url.Action("MailMeta", "Admin")', { headers: { 'Accept':'application/json' }});
+		  if (!r.ok) return;
+		  const m = await r.json();
+		  if (m.lastId) {
+			lastId = Number(m.lastId);
+			localStorage.setItem('mail:lastId', String(lastId));
+		  }
+		  if (typeof m.unreadCount === 'number') updateTitle(m.unreadCount);
+		} catch {}
+	  }
+
+	  async function poll() {
+		try {
+		  const r = await fetch('@Url.Action("CheckMail", "Admin")' + `?afterId=${lastId}`, {
+			headers: { 'Accept':'application/json' }
+		  });
+		  if (!r.ok) return;
+		  const data = await r.json();
+
+		  let hasNew = false;
+		  if (Array.isArray(data.newItems) && data.newItems.length) {
+			data.newItems.forEach(it => {
+			  const id = Number(it.iletisimID || 0);
+			  if (id > lastId) lastId = id;
+			  renderToList(it);
+			});
+			localStorage.setItem('mail:lastId', String(lastId));
+			hasNew = true;
+		  }
+
+		  if (typeof data.unreadCount === 'number') updateTitle(data.unreadCount);
+		  if (!firstPoll && hasNew) playDing();
+		  firstPoll = false;
+		} catch {}
+	  }
+
+	  // Başlat
+	  initMeta().then(() => {
+		poll();
+		setInterval(poll, POLL_MS);
+		window.addEventListener('focus', poll);
+	  });
+	})();
+</script>
 
 </html>
+

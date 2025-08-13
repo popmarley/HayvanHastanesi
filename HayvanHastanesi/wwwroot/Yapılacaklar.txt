@@ -29,16 +29,17 @@
 *Mail Menüsünde
 -Hangi seçenek seçili ise o aktif görünecek
 -tikleyince silme iþlevi olacak
--kullanýcýya göre mailleri okundu okunmadý belli olacak
--okunmayan mail sayýsý kadar sayý yazacak
+-kullanýcýya göre mailleri okundu okunmadý belli olacak +
+-okunmayan mail sayýsý kadar sayý yazacak +
 -yýldýzlanan mail sayýsý kadar sayý yazacak
 -silinen mailler çöp kutusuna gidecek
 -çöp kutusunda olan mesajlar 30 gün sonra otomatik olarak silinecek
 -çöp kutusunda direkt silme olacak
 -yenile butonuna basýnca sayfa yenilenmeden gelen kutusunu yenilecek
--mail gelince bildirimlere düþecek
--mail gelince bildirim sesi gelecek
--mail gelince yani okunmamýs mail olunca icon kýsmýnýn yanýnda sayý görünecek paneli (1) gibi
+-mail gelince sað üstteki icon bildirimlerine düþecek
+-mail gelince bildirim sesi gelecek +
+-mail gelince yani okunmamýs mail olunca icon kýsmýnýn yanýnda sayý görünecek paneli (1) gibi +
+-mail gelince gelen kutusu yanýndaki sayý da otomatik olarak güncellenecek ajaxla
 -maillerin konusu görünecek sadece týklayýnca tümü +
 -her sayfada 20 tane mail olacak diðer maillerde sayfa geçiþinde ajaxla çekilip sayfa yenilenmeden getirilecek
 -tikleme yapýnca yýldýzlama ve silme iþlevi de görünecek
@@ -46,6 +47,9 @@
 -sýfýrdan Mail gönderme olacak
 -okunmadý butonu olacak
 
+
+*Mail okuma menüsünde 
+-geri butonu olacak týklayýnca gelen kutusna gidecek
 
 
 *Randevular menüsünde
