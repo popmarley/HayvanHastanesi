@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250809102406_2")]
-    partial class _2
+    [Migration("20250813174044_1")]
+    partial class _1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,10 +53,10 @@ namespace Data.Migrations
                     b.Property<DateTime>("OlusturmaTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<TimeSpan>("RandevuSaati")
+                    b.Property<TimeSpan?>("RandevuSaati")
                         .HasColumnType("time");
 
-                    b.Property<DateTime>("RandevuTarihi")
+                    b.Property<DateTime?>("RandevuTarihi")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Soyad")
