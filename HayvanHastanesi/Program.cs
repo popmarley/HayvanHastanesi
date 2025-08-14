@@ -1,3 +1,4 @@
+using System;
 using Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
@@ -42,9 +43,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseCookiePolicy();   // CookiePolicy önce
 app.UseSession();
 
-app.UseAuthentication(); // <- EKLENMELÝ
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
